@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.io.PrintStream;
 import java.util.AbstractList;
 
-import starlogoc.Colors;
 import starlogoc.StarLogo;
 import torusworld.SLTerrain;
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="StarLogoOriginal"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Program Files/StarLogo TNG/starlogotng.jar" sourcepath="/Version1.5"/>
-	<classpathentry kind="lib" path="C:/Program Files/StarLogo TNG/starlogo-c/lib/pc/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/StarLogo TNG/starlogo-c/lib/pc/jogl.jar"/>
+	<classpathentry kind="lib" path="libs/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="libs/jdom.jar"/>
+	<classpathentry kind="lib" path="libs/jogl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

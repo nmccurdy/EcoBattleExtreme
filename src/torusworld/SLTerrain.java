@@ -1,6 +1,6 @@
 package torusworld;
 
-import starlogoc.Colors;
+//import starlogoc.Colors;
 import starlogoc.StarLogo;
 import starlogoc.PatchManager;
 import starlogoc.TerrainData;
@@ -10,7 +10,7 @@ import javax.media.opengl.GL;
 //import com.sun.medialib.mlib.Image;
 import com.sun.opengl.util.texture.TextureData;
 
-import terraineditor.Region;
+//import terraineditor.Region;
 import torusworld.math.*;
 
 import java.awt.Color;
@@ -780,55 +780,55 @@ public class SLTerrain
      * to display selection with on-the-fly editor.
      * The arguments are the patch coordinates of the region corners (with x1 <= x2 && y1 <= y2)
      */
-    public static void renderOverlay(Region region) {
-        int x1 = region.minX, y1 = region.minY;
-        int x2 = region.maxX, y2 = region.maxY;
-        
-        if (x1 > x2 || y1 > y2) {
-            return;
-        }
-
-        if (x1 < 0 || y1 < 0 || x2 >= width || y2 >= height) {
-            System.out.println("SLTerrain::drawOverlay: out of bounds arguments: " + 
-                               x1 + " " + y1 + " -> " + x2 + " " + y2);
-        }
-        GL gl = SLRendering.getGL();
-        int[] depthFunc = new int[1];
-        gl.glGetIntegerv(GL.GL_DEPTH_FUNC, depthFunc, 0);
-        gl.glDepthFunc(GL.GL_EQUAL);
-        
-        gl.glEnable(GL.GL_BLEND);
-        gl.glBlendFunc(GL.GL_ONE_MINUS_DST_COLOR, GL.GL_ZERO);
-        gl.glColor4f(1, 1, 1, 1);
-        gl.glBegin(GL.GL_TRIANGLES);
-        for (int x = x1; x <= x2; x++) {
-            for (int y = y1; y <= y2; y++) {
-                data.getTerrainDataPatch(x, y, tempPatch);
-                renderPatch(x, y, tempPatch, false);
-            }
-        }
-        gl.glEnd();
-        
-/*      // This would show areas that are obscured with a slight shade. Nice, but too slow..
- 
-        gl.glDepthFunc(GL.GL_NOTEQUAL);
-        
-        gl.glBlendFunc(GL.GL_ONE_MINUS_DST_COLOR, GL.GL_SRC_ALPHA);
-        gl.glColor4f(0.1f, 0.1f, 0.1f, 0.9f);
-        gl.glBegin(GL.GL_TRIANGLES);
-        for (int x = x1; x <= x2; x++) {
-            for (int y = y1; y <= y2; y++) {
-                data.getTerrainDataPatch(x, y, tempPatch);
-                renderPatch(x, y, tempPatch, false);
-            }
-        }
-        gl.glEnd();*/
-        
-        gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
-        
-        gl.glDepthFunc(depthFunc[0]);
-        
-    }
+//    public static void renderOverlay(Region region) {
+//        int x1 = region.minX, y1 = region.minY;
+//        int x2 = region.maxX, y2 = region.maxY;
+//        
+//        if (x1 > x2 || y1 > y2) {
+//            return;
+//        }
+//
+//        if (x1 < 0 || y1 < 0 || x2 >= width || y2 >= height) {
+//            System.out.println("SLTerrain::drawOverlay: out of bounds arguments: " + 
+//                               x1 + " " + y1 + " -> " + x2 + " " + y2);
+//        }
+//        GL gl = SLRendering.getGL();
+//        int[] depthFunc = new int[1];
+//        gl.glGetIntegerv(GL.GL_DEPTH_FUNC, depthFunc, 0);
+//        gl.glDepthFunc(GL.GL_EQUAL);
+//        
+//        gl.glEnable(GL.GL_BLEND);
+//        gl.glBlendFunc(GL.GL_ONE_MINUS_DST_COLOR, GL.GL_ZERO);
+//        gl.glColor4f(1, 1, 1, 1);
+//        gl.glBegin(GL.GL_TRIANGLES);
+//        for (int x = x1; x <= x2; x++) {
+//            for (int y = y1; y <= y2; y++) {
+//                data.getTerrainDataPatch(x, y, tempPatch);
+//                renderPatch(x, y, tempPatch, false);
+//            }
+//        }
+//        gl.glEnd();
+//        
+///*      // This would show areas that are obscured with a slight shade. Nice, but too slow..
+// 
+//        gl.glDepthFunc(GL.GL_NOTEQUAL);
+//        
+//        gl.glBlendFunc(GL.GL_ONE_MINUS_DST_COLOR, GL.GL_SRC_ALPHA);
+//        gl.glColor4f(0.1f, 0.1f, 0.1f, 0.9f);
+//        gl.glBegin(GL.GL_TRIANGLES);
+//        for (int x = x1; x <= x2; x++) {
+//            for (int y = y1; y <= y2; y++) {
+//                data.getTerrainDataPatch(x, y, tempPatch);
+//                renderPatch(x, y, tempPatch, false);
+//            }
+//        }
+//        gl.glEnd();*/
+//        
+//        gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+//        
+//        gl.glDepthFunc(depthFunc[0]);
+//        
+//    }
     
     /**
      * Renders a grid that outlines the patches. This is useful

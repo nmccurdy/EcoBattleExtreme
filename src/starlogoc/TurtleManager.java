@@ -19,8 +19,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
-import starlogoc.Variable.VariableScope;
-import starlogoc.Variable.VariableType;
+//import starlogoc.Variable.VariableScope;
+//import starlogoc.Variable.VariableType;
 import terraineditor.TerrainFileFormatUtils;
 
 public class TurtleManager {

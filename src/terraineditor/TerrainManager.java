@@ -26,15 +26,15 @@ public class TerrainManager
 		pManager = pm;
 		td = pm.getCurrentTerrain();
 		
-		pManager.addListener(new PatchManagerListener() {
-			public void terrainChanged(int oldIndex) {
-				td = pManager.getCurrentTerrain(); 
-			}
-			
-			public void terrainCreated(int index) { }
-			public void terrainDeleted(String name, int index) { }
-			public void terrainRenamed(int index) { }
-		});
+//		pManager.addListener(new PatchManagerListener() {
+//			public void terrainChanged(int oldIndex) {
+//				td = pManager.getCurrentTerrain(); 
+//			}
+//			
+//			public void terrainCreated(int index) { }
+//			public void terrainDeleted(String name, int index) { }
+//			public void terrainRenamed(int index) { }
+//		});
 	}
 	
 
@@ -391,7 +391,7 @@ public class TerrainManager
 			return false;
 		
 		String version = tokenizer.getNextToken();
-		pManager.clearAllLevels(); 
+//		pManager.clearAllLevels(); 
 		System.out.println("Version: " + version);
 		// code to load old terrain format and convert to new format
 		if (version.equals("0")) {

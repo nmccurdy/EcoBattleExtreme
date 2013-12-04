@@ -85,7 +85,7 @@ public class PatchManager {
 	 * Resets this PM to it's initial state
 	 */
 	public void reset() {
-		clearAllLevels();
+//		clearAllLevels();
 //		initTerrains(changedPatches); // intialize terrain structures in VM
 		maxTerrains = getMaxTerrains();
 		terrains = new TerrainData[maxTerrains];
@@ -106,14 +106,14 @@ public class PatchManager {
 		return 1;
 	}
 
-	public void addListener(PatchManagerListener l) {
-		listeners.add(PatchManagerListener.class, l); 
-	}
-	
-	public void removeListener(PatchManagerListener l) {
-		listeners.remove(PatchManagerListener.class, l); 
-	}
-	
+//	public void addListener(PatchManagerListener l) {
+//		listeners.add(PatchManagerListener.class, l); 
+//	}
+//	
+//	public void removeListener(PatchManagerListener l) {
+//		listeners.remove(PatchManagerListener.class, l); 
+//	}
+//	
 	public void createTerrain(int index, int width, int height) {
 		createTerrain(index, "Level "+index, width, height); 
 	}
@@ -174,9 +174,9 @@ public class PatchManager {
 			terrainCopies[index] = new TerrainData(terrains[index]); 
 			names.put(index, name);
 			
-			PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
-        	for (int j = 0; j < ls.length; j++)
-                ls[j].terrainCreated(index); 	
+//			PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
+//        	for (int j = 0; j < ls.length; j++)
+//                ls[j].terrainCreated(index); 	
 		}
 		else {
 			RuntimeException e = new RuntimeException("Illegal index for new terrain");
@@ -199,9 +199,9 @@ public class PatchManager {
 				editorModifiedFlag = true; 		// gets TorusWorld to redraw the terrain
 				currentTerrain = terrains[index];
 				currentIndex = index; 
-				PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
-	        	for (int j = 0; j < ls.length; j++)
-	                ls[j].terrainChanged(index);
+//				PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
+//	        	for (int j = 0; j < ls.length; j++)
+//	                ls[j].terrainChanged(index);
 	        	
 //				setPatchTerrain0(index);
 //				setPatchesShown0(true);
@@ -210,12 +210,12 @@ public class PatchManager {
 		}
 	}
 	
-	public void renameVariable(Variable oldVar, Variable newVar) {
-	    for (TerrainData terrain : terrains) {
-	        if (terrain != null)
-	            terrain.renameVariable(oldVar, newVar);
-	    }
-	}
+//	public void renameVariable(Variable oldVar, Variable newVar) {
+//	    for (TerrainData terrain : terrains) {
+//	        if (terrain != null)
+//	            terrain.renameVariable(oldVar, newVar);
+//	    }
+//	}
 
 //	public void reallocateVariables(List<Variable> newVarList) {
 //		// tell each terrain to reallocate its variables
@@ -287,29 +287,29 @@ public class PatchManager {
 	/**
 	 * Renames a terrain if there is a terrain with index i
 	 */
-	public void renameTerrain(int i, String newName) {
-		if(names.containsKey(i))
-			names.put(i, newName); 
-		
-		PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
-    	for (int j = 0; j < ls.length; j++)
-            ls[j].terrainRenamed(i);
-	}
+//	public void renameTerrain(int i, String newName) {
+//		if(names.containsKey(i))
+//			names.put(i, newName); 
+//		
+//		PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
+//    	for (int j = 0; j < ls.length; j++)
+//            ls[j].terrainRenamed(i);
+//	}
 	
 	/**
 	 * Deletes all of the levels in this
 	 */
-	public void clearAllLevels() {
-		for(Integer i : names.keySet()) {	// have to re-implement delete to prevent 
-			String name = names.get(i); 	// a concurrent modification exception
-			terrains[i] = null;
-			terrainCopies[i] = null; 
-			PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
-	    	for (int j = 0; j < ls.length; j++)
-	            ls[j].terrainDeleted(name, i);
-		}
-		names.clear(); 
-	}
+//	public void clearAllLevels() {
+//		for(Integer i : names.keySet()) {	// have to re-implement delete to prevent 
+//			String name = names.get(i); 	// a concurrent modification exception
+//			terrains[i] = null;
+//			terrainCopies[i] = null; 
+//			PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
+//	    	for (int j = 0; j < ls.length; j++)
+//	            ls[j].terrainDeleted(name, i);
+//		}
+//		names.clear(); 
+//	}
 	
 	/**
 	 * Deletes a terrain with a given name
@@ -327,9 +327,9 @@ public class PatchManager {
     	// at least 2 terrains
     	setPatchTerrain((Integer)names.keySet().toArray()[0]);
 		
-		PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
-    	for (int j = 0; j < ls.length; j++)
-            ls[j].terrainDeleted(name, i);
+//		PatchManagerListener[] ls = listeners.getListeners(PatchManagerListener.class); 
+//    	for (int j = 0; j < ls.length; j++)
+//            ls[j].terrainDeleted(name, i);
 	}
 	
 	/**

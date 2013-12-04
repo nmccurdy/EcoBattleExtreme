@@ -3,7 +3,7 @@ package starjava;
 import javax.media.opengl.GLAutoDrawable;
 
 import starlogoc.StarLogo;
-import torusworld.SLAnimator;
+//import torusworld.SLAnimator;
 import torusworld.SLTerrain;
 import torusworld.TorusWorld;
 

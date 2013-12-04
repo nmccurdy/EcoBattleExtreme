@@ -11,7 +11,7 @@ import javax.media.opengl.glu.GLU;
 
 import com.sun.opengl.util.GLUT;
 
-import terraineditor.Region;
+//import terraineditor.Region;
 import torusworld.math.Cylinder;
 import torusworld.math.Frustum;
 import torusworld.math.Vector3f;
@@ -34,7 +34,7 @@ public class SLRendering
     public static boolean lighting = true;
     
     public static boolean showTerrainSelection = false;
-    public static Region terrainSelection; 
+//    public static Region terrainSelection; 
      
     private static boolean showAxes = false;
     private static boolean showCylinders = false;
@@ -288,8 +288,8 @@ public class SLRendering
       if (!ortho)
           fence.draw();
 
-      if (showTerrainSelection)
-          SLTerrain.renderOverlay(terrainSelection); 
+//      if (showTerrainSelection)
+//          SLTerrain.renderOverlay(terrainSelection); 
       
 
       gl.glDisable(GL.GL_LIGHTING);

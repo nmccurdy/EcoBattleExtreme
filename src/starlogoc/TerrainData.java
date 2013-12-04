@@ -64,7 +64,7 @@ public class TerrainData {
 	private static StarLogo sl;
 	private int numPatchesOwn;
 	private LongBuffer patchHeap;
-	private List<Variable> varList = new ArrayList<Variable>();
+//	private List<Variable> varList = new ArrayList<Variable>();
 
 	//TODO 
 	/*
@@ -345,12 +345,12 @@ public class TerrainData {
     	p = getPatch(patchX, patchY);
     }
     
-    /** Replace oldVar with newVar, or do nothing if oldVar doesn't exist. */
-    public void renameVariable(Variable oldVar, Variable newVar) {
-        int index = varList.indexOf(oldVar);
-        if (index != -1)
-            varList.set(index, newVar);
-    }
+//    /** Replace oldVar with newVar, or do nothing if oldVar doesn't exist. */
+//    public void renameVariable(Variable oldVar, Variable newVar) {
+//        int index = varList.indexOf(oldVar);
+//        if (index != -1)
+//            varList.set(index, newVar);
+//    }
 
 //	public void reallocateVariables(List<Variable> newVarList) {
 //		// Shortcircuit if no changes have been made

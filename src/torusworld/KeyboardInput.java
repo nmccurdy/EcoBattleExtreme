@@ -82,16 +82,16 @@ public class KeyboardInput implements KeyListener {
     }
     
     public void keyReleased(final KeyEvent e) {
-        Runnable invokeAfterDelay=new Runnable(){
-            public void run(){
-                try {
-                    Thread.sleep( (long)
-                            (150 / sliderSpeedToMultiplierMap[StarLogo.getSpeedSliderPosition()])
-                            ); //this should fix the unregistered key taps
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-                
+//        Runnable invokeAfterDelay=new Runnable(){
+//            public void run(){
+//                try {
+//                    Thread.sleep( (long)
+//                            (150 / sliderSpeedToMultiplierMap[StarLogo.getSpeedSliderPosition()])
+//                            ); //this should fix the unregistered key taps
+//                } catch (InterruptedException ex) {
+//                    ex.printStackTrace();
+//                }
+//                
 //                int index = -1;
 //                
 //                if(e.getKeyCode() >= 0 && e.getKeyCode() < 256)
@@ -99,9 +99,9 @@ public class KeyboardInput implements KeyListener {
 //                
 //                if(index >= 0)
 //                    keyboardData.put(keyIndices[e.getKeyCode()], (byte)0);
-            }
-        };
-        new Thread(invokeAfterDelay).start();
+//            }
+//        };
+//        new Thread(invokeAfterDelay).start();
     }
     
     public void keyTyped(KeyEvent e) {

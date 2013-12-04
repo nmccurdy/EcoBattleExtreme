@@ -34,9 +34,9 @@ import javax.swing.event.EventListenerList;
 import starlogoc.GameManager;
 import starlogoc.PatchManager;
 import starlogoc.StarLogo;
-import terraineditor.Region;
+//import terraineditor.Region;
 import terraineditor.TerrainManager;
-import torusworld.gui.SLDrawingComponent;
+//import torusworld.gui.SLDrawingComponent;
 import torusworld.math.Vector3f;
 import torusworld.model.ModelManager;
 
@@ -121,7 +121,7 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
     private TerrainManager tm;
     private int startx;
     private int starty;
-    static private Region editreg;    
+//    static private Region editreg;    
 
     /** the id of the turtle that you see through (-1 for init) */
     private int turtleCount = -1;
@@ -196,7 +196,7 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
         glCaps.setDoubleBuffered(true);
         
         addGLEventListener(this);
-        SLAnimator.init(this, sl, this);
+//        SLAnimator.init(this, sl, this);
         
         screenshotReceivers = new HashSet<ImageReceiver>();
         
@@ -449,12 +449,12 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
             }
         }
         
-        if (slgui.isEditingTerrain() && editreg != null) {
-            SLRendering.showTerrainSelection = true;
-            SLRendering.terrainSelection = editreg;
-        } else {
-            SLRendering.showTerrainSelection = false;
-        }
+//        if (slgui.isEditingTerrain() && editreg != null) {
+//            SLRendering.showTerrainSelection = true;
+//            SLRendering.terrainSelection = editreg;
+//        } else {
+//            SLRendering.showTerrainSelection = false;
+//        }
 
         synchronized (this)
         {
@@ -1057,7 +1057,7 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
 
     // Doesn't work
     public void actionPerformed(ActionEvent e) {
-        sl.handleMenuEvent(e);
+//        sl.handleMenuEvent(e);
     }
 
     //TODO cmcheng
@@ -1154,7 +1154,7 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
             if (!hoveredAgent.monitored)
             {
                 // select the agent intersected by the ray
-                sl.selectedAgent(hoveredAgent.who);
+//                sl.selectedAgent(hoveredAgent.who);
 
                 // shortcut code to make the monitor indicator show up
                 // immediately rather than next frame
@@ -1162,7 +1162,7 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
             } else
             {
                 // select the agent intersected by the ray
-                sl.deselectedAgent(hoveredAgent.who);
+//                sl.deselectedAgent(hoveredAgent.who);
 
                 // shortcut code to make the montitor indicator show up
                 // immediately rather than next frame
@@ -1360,19 +1360,19 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
 
     // starts to highlight a region
     private void oftTerrainMousePress(MouseEvent e) {
-    	draggedAgent = hoveredAgent;  // maybe drag agent
-    	editreg = null;
-        int x = miniViewport.screenToRenderedX(e.getX());
-        int y = miniViewport.screenToRenderedY(e.getY());
-        
-        Vector3f point = SLMouseTracker.getPoint();
-        x = SLTerrain.getPatchX(point.x);
-       	y = SLTerrain.getPatchY(point.z);      
-       	startx = x; starty = y;
-       	editreg = new Region(startx, starty, startx, starty);
-        
-        // Set mouse tracker to real time (but inefficient) operation
-        SLMouseTracker.setRealTime(true);
+//    	draggedAgent = hoveredAgent;  // maybe drag agent
+//    	editreg = null;
+//        int x = miniViewport.screenToRenderedX(e.getX());
+//        int y = miniViewport.screenToRenderedY(e.getY());
+//        
+//        Vector3f point = SLMouseTracker.getPoint();
+//        x = SLTerrain.getPatchX(point.x);
+//       	y = SLTerrain.getPatchY(point.z);      
+//       	startx = x; starty = y;
+//       	editreg = new Region(startx, starty, startx, starty);
+//        
+//        // Set mouse tracker to real time (but inefficient) operation
+//        SLMouseTracker.setRealTime(true);
     }
     
     // highlights a region
@@ -1391,7 +1391,7 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
  		// drag an agent...
  		if(draggedAgent != null && SLCameras.currentCamera == SLCameras.PERSPECTIVE_CAMERA) {          	 			
          	int who = draggedAgent.who;         	
-     		editreg = null; 	// don't highlight terrain
+//     		editreg = null; 	// don't highlight terrain
      		// temporarily set to realtime for smoother results
      		SLMouseTracker.setRealTime(true);
      		x = SLTerrain.getSpacelandPatchX(p.x); 
@@ -1401,11 +1401,11 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
  			for (int i = 0; i < ls.length; i++)
  				ls[i].agentDragged(who, x, y);  	    	
          }  
-    	 else if(slgui.isEditingTerrain()) {	// ...or highlight the region selected 
-    		 x = SLTerrain.getPatchX(p.x); 
-    		 y = SLTerrain.getPatchY(p.z);
-    		 editreg = new Region(startx,starty,x, y);
-    	 }
+//    	 else if(slgui.isEditingTerrain()) {	// ...or highlight the region selected 
+//    		 x = SLTerrain.getPatchX(p.x); 
+//    		 y = SLTerrain.getPatchY(p.z);
+//    		 editreg = new Region(startx,starty,x, y);
+//    	 }
     }
     
     // Set mouse tracker back to efficient mode
@@ -1416,51 +1416,51 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
     
     // raise, lower, pit or mound the area
     private void oftTerrainMouseWheel(MouseWheelEvent e) {
-    	if(editreg != null) {
-			int clicks = e.getWheelRotation();
-			int op = clicks < 0 ? 0 : 1; 			
-			clicks = Math.abs(clicks); 
-			if(e.isShiftDown())
-				op += 2; 
-			
-			for(int i = 0; i < clicks; i++)
-				handleTerrain(op); 
-    	}
+//    	if(editreg != null) {
+//			int clicks = e.getWheelRotation();
+//			int op = clicks < 0 ? 0 : 1; 			
+//			clicks = Math.abs(clicks); 
+//			if(e.isShiftDown())
+//				op += 2; 
+//			
+//			for(int i = 0; i < clicks; i++)
+//				handleTerrain(op); 
+//    	}
     }
     
     // handles editing the terrain. i is an integer corresponding
     // to the desired operation. 
     private void handleTerrain(int i){
-    	if(editreg != null){
-	    	switch(i) {
-	    		case 0:
-	    			tm.addRegionHeight(editreg, 1, false);
-	    			break;
-	    		case 1:
-	    			tm.addRegionHeight(editreg, -1, false);
-	    			break;
-	    		case 2:
-	    			tm.mound(editreg, 1, false);
-	    			break;
-	    		case 3:
-	    			tm.pit(editreg, 1, false);
-	    			break;
-	    		case 4:
-	    			tm.setRegionHeight(editreg, 0, false);
-	    			break;
-	    		default:
-	    			break;	    		        		 
-    		}
-	    	pManager.editorModifiedFlag = (i>=0 && i <=4);
-    	}	
+//    	if(editreg != null){
+//	    	switch(i) {
+//	    		case 0:
+//	    			tm.addRegionHeight(editreg, 1, false);
+//	    			break;
+//	    		case 1:
+//	    			tm.addRegionHeight(editreg, -1, false);
+//	    			break;
+//	    		case 2:
+//	    			tm.mound(editreg, 1, false);
+//	    			break;
+//	    		case 3:
+//	    			tm.pit(editreg, 1, false);
+//	    			break;
+//	    		case 4:
+//	    			tm.setRegionHeight(editreg, 0, false);
+//	    			break;
+//	    		default:
+//	    			break;	    		        		 
+//    		}
+//	    	pManager.editorModifiedFlag = (i>=0 && i <=4);
+//    	}	
     } 
     
     // colors the highlighted region with the given color
     private void colorRegion(int col) {
-    	if(editreg != null){
-			tm.setRegionColor(editreg, col);
-			pManager.editorModifiedFlag = true;
-		}
+//    	if(editreg != null){
+//			tm.setRegionColor(editreg, col);
+//			pManager.editorModifiedFlag = true;
+//		}
     }  
     
     /**
@@ -1483,45 +1483,45 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
      */
     public void drawingToolsMousePressed(MouseEvent e) {
     	
-    	// update mouse pointer location
-		boolean miniViewShown = slgui.isMiniViewShown(); 
-		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
-                && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
-            SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
-		
-		if (drawingControlSelected == SLDrawingComponent.RECT_TOOL ||
-    			drawingControlSelected == SLDrawingComponent.CIRC_TOOL || 
-    			drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
-    		//The mousetracker keeps track of where the mouse is pointing,
-    		//and based on camera, it figures out where in the world we are pointing (in framerendered)
-    		//We get the point we're pointing at (point.y comes out at you)
-    		Vector3f point = SLMouseTracker.getPoint();
-    		float x = point.x;
-    		float y = point.z;
-
-    		//We need to convert from space coordinates to terrain coordinates
-    		drawStartX = tm.coordToTerrainX(x);
-    		drawStartY = tm.coordToTerrainY(y);
-
-    		drawEndX = tm.coordToTerrainX(x);
-    		drawEndY = tm.coordToTerrainY(y);
-    		
-    		drawingStarted = true;
-    		// This should happen so it doesn't lag. Instead of updating every 5 frames, update every 1 frame
-    		SLMouseTracker.setRealTime(true);
-    	}
-    	else if (drawingControlSelected == SLDrawingComponent.PENC_TOOL) {
-    		
-    		//Figure out where the mouse is currently pointing.
-    		Vector3f point = SLMouseTracker.getPoint();
-    		int currentX = tm.coordToTerrainX(point.x);
-    		int currentY = tm.coordToTerrainY(point.z);
-    		
-    		tm.fillEllipse(currentX - pencilSize/2, currentY - pencilSize/2, 
-    				currentX + pencilSize/2, currentY + pencilSize/2, drawingColor);
-    		//drawingStarted = true;
-    		SLMouseTracker.setRealTime(true);
-    	}
+//    	// update mouse pointer location
+//		boolean miniViewShown = slgui.isMiniViewShown(); 
+//		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
+//                && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
+//            SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
+//		
+//		if (drawingControlSelected == SLDrawingComponent.RECT_TOOL ||
+//    			drawingControlSelected == SLDrawingComponent.CIRC_TOOL || 
+//    			drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
+//    		//The mousetracker keeps track of where the mouse is pointing,
+//    		//and based on camera, it figures out where in the world we are pointing (in framerendered)
+//    		//We get the point we're pointing at (point.y comes out at you)
+//    		Vector3f point = SLMouseTracker.getPoint();
+//    		float x = point.x;
+//    		float y = point.z;
+//
+//    		//We need to convert from space coordinates to terrain coordinates
+//    		drawStartX = tm.coordToTerrainX(x);
+//    		drawStartY = tm.coordToTerrainY(y);
+//
+//    		drawEndX = tm.coordToTerrainX(x);
+//    		drawEndY = tm.coordToTerrainY(y);
+//    		
+//    		drawingStarted = true;
+//    		// This should happen so it doesn't lag. Instead of updating every 5 frames, update every 1 frame
+//    		SLMouseTracker.setRealTime(true);
+//    	}
+//    	else if (drawingControlSelected == SLDrawingComponent.PENC_TOOL) {
+//    		
+//    		//Figure out where the mouse is currently pointing.
+//    		Vector3f point = SLMouseTracker.getPoint();
+//    		int currentX = tm.coordToTerrainX(point.x);
+//    		int currentY = tm.coordToTerrainY(point.z);
+//    		
+//    		tm.fillEllipse(currentX - pencilSize/2, currentY - pencilSize/2, 
+//    				currentX + pencilSize/2, currentY + pencilSize/2, drawingColor);
+//    		//drawingStarted = true;
+//    		SLMouseTracker.setRealTime(true);
+//    	}
     }
     
     /**
@@ -1531,50 +1531,50 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
      * @param e
      */
     public void drawingToolsMouseDragged(MouseEvent e) {
-    	//If we're entering this method, we're in drawing Mode.
-    	
-		//First get the coordinates of the mouse, set as the end
-    	// update the mouse position
-    	if (drawingControlSelected == SLDrawingComponent.RECT_TOOL ||
-    			drawingControlSelected == SLDrawingComponent.CIRC_TOOL || 
-    			drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
-    		boolean miniViewShown = slgui.isMiniViewShown(); 
-    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
-    				&& !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
-    			SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
-		
-    		//Figure out where the mouse is currently pointing.
-    		Vector3f point = SLMouseTracker.getPoint();
-    		float x = point.x;
-    		float y = point.z;
-    		drawEndX = tm.coordToTerrainX(x);
-    		drawEndY = tm.coordToTerrainY(y);
-    	}
-    	
-    	if (drawingControlSelected == SLDrawingComponent.RECT_TOOL) {
-           	//Then ask the terrain manager to highlight the given rectangle
-           	tm.highlightRectangle(drawStartX, drawStartY, drawEndX, drawEndY, drawingColor);
-    	}
-    	else if (drawingControlSelected == SLDrawingComponent.CIRC_TOOL) {
-    		tm.highlightEllipse(drawStartX, drawStartY, drawEndX, drawEndY, drawingColor);
-    	}
-    	else if (drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
-    		tm.highlightImage(drawStartX, drawStartY, drawEndX, drawEndY, drawingImage);
-    	}
-    	else if (drawingControlSelected == SLDrawingComponent.PENC_TOOL) {
-    		boolean miniViewShown = slgui.isMiniViewShown(); 
-    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
-                    && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
-                SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
-    		//drawingStarted = false;
-    		//Figure out where the mouse is currently pointing.
-    		Vector3f point = SLMouseTracker.getPoint();
-    		int currentX = tm.coordToTerrainX(point.x);
-    		int currentY = tm.coordToTerrainY(point.z);
-    		
-    		tm.fillEllipse(currentX - pencilSize/2, currentY - pencilSize/2, 
-    				currentX + pencilSize/2, currentY + pencilSize/2, drawingColor);
-    	}
+//    	//If we're entering this method, we're in drawing Mode.
+//    	
+//		//First get the coordinates of the mouse, set as the end
+//    	// update the mouse position
+//    	if (drawingControlSelected == SLDrawingComponent.RECT_TOOL ||
+//    			drawingControlSelected == SLDrawingComponent.CIRC_TOOL || 
+//    			drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
+//    		boolean miniViewShown = slgui.isMiniViewShown(); 
+//    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
+//    				&& !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
+//    			SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
+//		
+//    		//Figure out where the mouse is currently pointing.
+//    		Vector3f point = SLMouseTracker.getPoint();
+//    		float x = point.x;
+//    		float y = point.z;
+//    		drawEndX = tm.coordToTerrainX(x);
+//    		drawEndY = tm.coordToTerrainY(y);
+//    	}
+//    	
+//    	if (drawingControlSelected == SLDrawingComponent.RECT_TOOL) {
+//           	//Then ask the terrain manager to highlight the given rectangle
+//           	tm.highlightRectangle(drawStartX, drawStartY, drawEndX, drawEndY, drawingColor);
+//    	}
+//    	else if (drawingControlSelected == SLDrawingComponent.CIRC_TOOL) {
+//    		tm.highlightEllipse(drawStartX, drawStartY, drawEndX, drawEndY, drawingColor);
+//    	}
+//    	else if (drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
+//    		tm.highlightImage(drawStartX, drawStartY, drawEndX, drawEndY, drawingImage);
+//    	}
+//    	else if (drawingControlSelected == SLDrawingComponent.PENC_TOOL) {
+//    		boolean miniViewShown = slgui.isMiniViewShown(); 
+//    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
+//                    && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
+//                SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
+//    		//drawingStarted = false;
+//    		//Figure out where the mouse is currently pointing.
+//    		Vector3f point = SLMouseTracker.getPoint();
+//    		int currentX = tm.coordToTerrainX(point.x);
+//    		int currentY = tm.coordToTerrainY(point.z);
+//    		
+//    		tm.fillEllipse(currentX - pencilSize/2, currentY - pencilSize/2, 
+//    				currentX + pencilSize/2, currentY + pencilSize/2, drawingColor);
+//    	}
     	
     }
     
@@ -1584,48 +1584,48 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
      * @param e
      */
     public void drawingToolsMouseReleased(MouseEvent e) {
-    	//First get the coordinates of the mouse, set as the end
-    	// update the mouse position
-    	if (drawingControlSelected == SLDrawingComponent.RECT_TOOL ||
-    			drawingControlSelected == SLDrawingComponent.CIRC_TOOL || 
-    			drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
-    		boolean miniViewShown = slgui.isMiniViewShown(); 
-    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
-    				&& !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
-    			SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
-		
-    		//Figure out where the mouse is currently pointing.
-    		Vector3f point = SLMouseTracker.getPoint();
-    		float x = point.x;
-    		float y = point.z;
-    		drawEndX = tm.coordToTerrainX(x);
-    		drawEndY = tm.coordToTerrainY(y);
-    		drawingStarted = false;
-    	}
-    	
-    	if (drawingControlSelected == SLDrawingComponent.RECT_TOOL) {
-    		tm.fillRectangle(drawStartX, drawStartY, drawEndX, drawEndY, drawingColor);
-    		SLMouseTracker.setRealTime(false);
-    	}
-    	else if (drawingControlSelected == SLDrawingComponent.CIRC_TOOL) {
-    		tm.fillEllipse(drawStartX, drawStartY, drawEndX, drawEndY, drawingColor);
-    		SLMouseTracker.setRealTime(false);
-    	}
-    	else if (drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
-    		if (drawingImage != null) {
-    			tm.fillImage(drawStartX, drawStartY, drawEndX, drawEndY, drawingImage);
-    		}
-    		SLMouseTracker.setRealTime(false);
-    	}
-    	else if (drawingControlSelected == SLDrawingComponent.PENC_TOOL) {
-    		boolean miniViewShown = slgui.isMiniViewShown(); 
-    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
-    				&& !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
-    			SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
-    		// djwendel - actually, you may still be in this mode, and highlighting looks
-    		// weird slow, so keep real time as true
-    		//SLMouseTracker.setRealTime(false);
-    	}
+//    	//First get the coordinates of the mouse, set as the end
+//    	// update the mouse position
+//    	if (drawingControlSelected == SLDrawingComponent.RECT_TOOL ||
+//    			drawingControlSelected == SLDrawingComponent.CIRC_TOOL || 
+//    			drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
+//    		boolean miniViewShown = slgui.isMiniViewShown(); 
+//    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
+//    				&& !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
+//    			SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
+//		
+//    		//Figure out where the mouse is currently pointing.
+//    		Vector3f point = SLMouseTracker.getPoint();
+//    		float x = point.x;
+//    		float y = point.z;
+//    		drawEndX = tm.coordToTerrainX(x);
+//    		drawEndY = tm.coordToTerrainY(y);
+//    		drawingStarted = false;
+//    	}
+//    	
+//    	if (drawingControlSelected == SLDrawingComponent.RECT_TOOL) {
+//    		tm.fillRectangle(drawStartX, drawStartY, drawEndX, drawEndY, drawingColor);
+//    		SLMouseTracker.setRealTime(false);
+//    	}
+//    	else if (drawingControlSelected == SLDrawingComponent.CIRC_TOOL) {
+//    		tm.fillEllipse(drawStartX, drawStartY, drawEndX, drawEndY, drawingColor);
+//    		SLMouseTracker.setRealTime(false);
+//    	}
+//    	else if (drawingControlSelected == SLDrawingComponent.IMAG_TOOL) {
+//    		if (drawingImage != null) {
+//    			tm.fillImage(drawStartX, drawStartY, drawEndX, drawEndY, drawingImage);
+//    		}
+//    		SLMouseTracker.setRealTime(false);
+//    	}
+//    	else if (drawingControlSelected == SLDrawingComponent.PENC_TOOL) {
+//    		boolean miniViewShown = slgui.isMiniViewShown(); 
+//    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
+//    				&& !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
+//    			SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
+//    		// djwendel - actually, you may still be in this mode, and highlighting looks
+//    		// weird slow, so keep real time as true
+//    		//SLMouseTracker.setRealTime(false);
+//    	}
     	
     	
     }
@@ -1638,52 +1638,52 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
      * @param e
      */
     public void drawingToolsMouseClicked(MouseEvent e) {
-    	if (drawingControlSelected == SLDrawingComponent.POLY_TOOL) {
-    		
-    		boolean miniViewShown = slgui.isMiniViewShown(); 
-    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
-                    && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport())) {
-                SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
-                //System.out.println("x " + e.getX());
-                //System.out.println("y " + e.getY());
-                //System.out.println("h " + height);
-    		}
-    		
-    		//Figure out where the mouse is currently pointing.
-    		Vector3f point = SLMouseTracker.getPoint();
-    		int currentX = tm.coordToTerrainX(point.x);
-    		int currentY = tm.coordToTerrainY(point.z);
-    		
-    		//First if the list is empty, add starting point.
-    		//(xList and yList are updated at the same time, so don't need to check yList)
-    		if (xList.isEmpty()) {
-    			xList.add(new Integer(currentX));
-    			yList.add(new Integer(currentY));
-    			SLMouseTracker.setRealTime(true);
-    		}
-    		else {
-    			int lastX = xList.get(xList.size() - 1);
-    			int lastY = yList.get(yList.size() - 1);
-    			
-    			if (currentX == lastX && currentY == lastY) {
-    				//If this is the same as the last x or y, fill polygon and erase list
-    				tm.fillPolygon(xList, yList, drawingColor);
-    				xList.clear();
-    				yList.clear();
-    				SLMouseTracker.setRealTime(false);
-    			}
-    			else {
-    				//Otherwise, add to the list of coordinates and draw all lines up until now
-    				xList.add(new Integer(currentX));
-    				yList.add(new Integer(currentY));
-    				tm.highlightPolygonLines(xList, yList, drawingColor);
-    				
-    			}
-    		}
-    		
-    		
-           	
-    	}
+//    	if (drawingControlSelected == SLDrawingComponent.POLY_TOOL) {
+//    		
+//    		boolean miniViewShown = slgui.isMiniViewShown(); 
+//    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
+//                    && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport())) {
+//                SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
+//                //System.out.println("x " + e.getX());
+//                //System.out.println("y " + e.getY());
+//                //System.out.println("h " + height);
+//    		}
+//    		
+//    		//Figure out where the mouse is currently pointing.
+//    		Vector3f point = SLMouseTracker.getPoint();
+//    		int currentX = tm.coordToTerrainX(point.x);
+//    		int currentY = tm.coordToTerrainY(point.z);
+//    		
+//    		//First if the list is empty, add starting point.
+//    		//(xList and yList are updated at the same time, so don't need to check yList)
+//    		if (xList.isEmpty()) {
+//    			xList.add(new Integer(currentX));
+//    			yList.add(new Integer(currentY));
+//    			SLMouseTracker.setRealTime(true);
+//    		}
+//    		else {
+//    			int lastX = xList.get(xList.size() - 1);
+//    			int lastY = yList.get(yList.size() - 1);
+//    			
+//    			if (currentX == lastX && currentY == lastY) {
+//    				//If this is the same as the last x or y, fill polygon and erase list
+//    				tm.fillPolygon(xList, yList, drawingColor);
+//    				xList.clear();
+//    				yList.clear();
+//    				SLMouseTracker.setRealTime(false);
+//    			}
+//    			else {
+//    				//Otherwise, add to the list of coordinates and draw all lines up until now
+//    				xList.add(new Integer(currentX));
+//    				yList.add(new Integer(currentY));
+//    				tm.highlightPolygonLines(xList, yList, drawingColor);
+//    				
+//    			}
+//    		}
+//    		
+//    		
+//           	
+//    	}
     }
     
     /**
@@ -1693,44 +1693,44 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
      * @param e
      */
     public void drawingToolsMouseMoved(MouseEvent e) {
-    	if (drawingControlSelected == SLDrawingComponent.POLY_TOOL) {
-    		if (xList.isEmpty()) {
-    			return;
-    		}
-    		
-    		boolean miniViewShown = slgui.isMiniViewShown(); 
-    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
-                    && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
-                SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
-    		
-    		//Figure out where the mouse is currently pointing.
-    		Vector3f point = SLMouseTracker.getPoint();
-    		int currentX = tm.coordToTerrainX(point.x);
-    		int currentY = tm.coordToTerrainY(point.z);
-    		
-    		//Add this to the list, draw the polygon lines, then remove it
-    		xList.add(new Integer(currentX));
-			yList.add(new Integer(currentY));
-			tm.highlightPolygonLines(xList, yList, drawingColor);
-			xList.remove(xList.size() - 1);
-			yList.remove(yList.size() - 1);
-    		
-    		
-    	}
-    	if (drawingControlSelected == SLDrawingComponent.PENC_TOOL) {
-    		boolean miniViewShown = slgui.isMiniViewShown(); 
-    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
-                    && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
-                SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
-    		
-    		//Figure out where the mouse is currently pointing.
-    		Vector3f point = SLMouseTracker.getPoint();
-    		int currentX = tm.coordToTerrainX(point.x);
-    		int currentY = tm.coordToTerrainY(point.z);
-    		
-    		tm.highlightEllipse(currentX - pencilSize/2, currentY - pencilSize/2, 
-    				currentX + pencilSize/2, currentY + pencilSize/2, drawingColor);
-    	}
+//    	if (drawingControlSelected == SLDrawingComponent.POLY_TOOL) {
+//    		if (xList.isEmpty()) {
+//    			return;
+//    		}
+//    		
+//    		boolean miniViewShown = slgui.isMiniViewShown(); 
+//    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
+//                    && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
+//                SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
+//    		
+//    		//Figure out where the mouse is currently pointing.
+//    		Vector3f point = SLMouseTracker.getPoint();
+//    		int currentX = tm.coordToTerrainX(point.x);
+//    		int currentY = tm.coordToTerrainY(point.z);
+//    		
+//    		//Add this to the list, draw the polygon lines, then remove it
+//    		xList.add(new Integer(currentX));
+//			yList.add(new Integer(currentY));
+//			tm.highlightPolygonLines(xList, yList, drawingColor);
+//			xList.remove(xList.size() - 1);
+//			yList.remove(yList.size() - 1);
+//    		
+//    		
+//    	}
+//    	if (drawingControlSelected == SLDrawingComponent.PENC_TOOL) {
+//    		boolean miniViewShown = slgui.isMiniViewShown(); 
+//    		if (!(SLCameras.orthoView && miniViewShown && miniViewport.mouseInViewport())
+//                    && !(!SLCameras.orthoView && miniViewShown && mapView.mouseInViewport()))
+//                SLMouseTracker.update(SLCameras.getMainViewCamera(), e.getX(), height - 1 - e.getY());
+//    		
+//    		//Figure out where the mouse is currently pointing.
+//    		Vector3f point = SLMouseTracker.getPoint();
+//    		int currentX = tm.coordToTerrainX(point.x);
+//    		int currentY = tm.coordToTerrainY(point.z);
+//    		
+//    		tm.highlightEllipse(currentX - pencilSize/2, currentY - pencilSize/2, 
+//    				currentX + pencilSize/2, currentY + pencilSize/2, drawingColor);
+//    	}
     }
     
     public void stopDrawing() {

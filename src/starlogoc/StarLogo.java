@@ -25,8 +25,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
-import starlogoc.Variable.VariableScope;
-import starlogoc.Variable.VariableType;
+//import starlogoc.Variable.VariableScope;
+//import starlogoc.Variable.VariableType;
 import terraineditor.TerrainFileFormatUtils;
 
 public class StarLogo {
@@ -62,16 +62,16 @@ public class StarLogo {
     
     public volatile boolean runningp = false;
     public volatile boolean juststartedp = false;
-    private static Set<StarLogoCObserver> observers = new LinkedHashSet<StarLogoCObserver>();
+//    private static Set<StarLogoCObserver> observers = new LinkedHashSet<StarLogoCObserver>();
     private Object lock = new Float(1);
     
 //    private TurtleManager tm;
     private PatchManager pm;
-    private static ShapeManager sm;
+//    private static ShapeManager sm;
     
     private int numGlobals;
     private LongBuffer globalHeap;
-    private List<Variable> varList = new ArrayList<Variable>();
+//    private List<Variable> varList = new ArrayList<Variable>();
     
     /** keeps track of all calling threads.  We need to seed the RNG of each new thread. */
     private HashSet<Thread> callingThreads = new HashSet<Thread>();
@@ -149,13 +149,13 @@ public class StarLogo {
         return pm;
     }
     
-    public ShapeManager getShapeManager() {
-    	return sm;
-    }
-    
-    public static void setShapeManager(ShapeManager s) {
-    	sm = s;
-    }
+//    public ShapeManager getShapeManager() {
+//    	return sm;
+//    }
+//    
+//    public static void setShapeManager(ShapeManager s) {
+//    	sm = s;
+//    }
     // NJM
     public void setPatchManager(PatchManager pm) {
     	this.pm = pm;
@@ -166,18 +166,18 @@ public class StarLogo {
 //    	this.tm = tm;
     }
 
-    public void addObserver(StarLogoCObserver sco) {
-        observers.add(sco);
-    }
-    
-    public void removeObserver(StarLogoCObserver sco) {
-        observers.remove(sco);
-    }
-    
-    public void handleMenuEvent(ActionEvent e) {
-        for (StarLogoCObserver observer : observers)
-            observer.handleMenuEvent(e);
-    }
+//    public void addObserver(StarLogoCObserver sco) {
+//        observers.add(sco);
+//    }
+//    
+//    public void removeObserver(StarLogoCObserver sco) {
+//        observers.remove(sco);
+//    }
+//    
+//    public void handleMenuEvent(ActionEvent e) {
+//        for (StarLogoCObserver observer : observers)
+//            observer.handleMenuEvent(e);
+//    }
     
 //    // native functions for manipulating the VM's breed->shape association lists
 //    private native void add_breed(long name_heap_ptr, long shape_heap_ptr);
@@ -564,17 +564,17 @@ public class StarLogo {
 //        while (i.hasNext()) i.next().vmTicked(slTime);
 //    }
     
-    public boolean selectedAgent(int who) {
-        for (StarLogoCObserver o : observers)
-            return o.selectedAgent(who);
-        return false;
-    }
-    
-    public boolean deselectedAgent(int who) {
-        for (StarLogoCObserver o : observers)
-            return o.deselectedAgent(who);
-        return false;
-    }
+//    public boolean selectedAgent(int who) {
+//        for (StarLogoCObserver o : observers)
+//            return o.selectedAgent(who);
+//        return false;
+//    }
+//    
+//    public boolean deselectedAgent(int who) {
+//        for (StarLogoCObserver o : observers)
+//            return o.deselectedAgent(who);
+//        return false;
+//    }
     
 //    public void noTurtlesAlive() {
 //        for(Iterator<StarLogoCObserver> it = observers.iterator(); it.hasNext(); it.next().noTurtlesAlive());
@@ -774,11 +774,11 @@ public class StarLogo {
 //        GameManager.getGameManager().hideMiniView();
 //    }
 //    
-    public static int getSpeedSliderPosition(){
-        for (StarLogoCObserver observer : observers)
-            return observer.getSpeedSliderPosition();
-        return 0;
-    }
+//    public static int getSpeedSliderPosition(){
+//        for (StarLogoCObserver observer : observers)
+//            return observer.getSpeedSliderPosition();
+//        return 0;
+//    }
     
 //    public String getSaveString() {
 //    	StringBuffer save = new StringBuffer();

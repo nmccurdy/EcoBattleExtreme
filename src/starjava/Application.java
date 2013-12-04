@@ -20,18 +20,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import layout.SLLoadLevelComponent;
+//import layout.SLLoadLevelComponent;
 import slcodeblocks.RuntimeSpeedPanel;
 import starlogoc.GameManager;
 import starlogoc.StarLogo;
-import starlogoc.StarLogoCObserver;
+//import starlogoc.StarLogoCObserver;
 import starlogotng.SLURL;
 import terraineditor.TerrainManager;
 import torusworld.TorusWorld;
 import torusworld.Turtles;
 
 public class Application implements SpeedObserver, Executable,
-		StarLogoCObserver, AgentMonitorObserver, AppMonitorObserver {
+		AgentMonitorObserver, AppMonitorObserver {
 
 	/** Camera perspectives */
 	public static final int AERIAL = 0;
@@ -95,7 +95,7 @@ public class Application implements SpeedObserver, Executable,
 		// sl.MAX_SOUNDS, sl);
 		// sl.setTurtleManager(tManager);
 
-		sl.addObserver(this);
+//		sl.addObserver(this);
 
 		pManager = new PatchManagerJava(101, 101, sl);
 		sl.setPatchManager(pManager);
@@ -141,7 +141,7 @@ public class Application implements SpeedObserver, Executable,
 		 * runtime tab } });
 		 */
 		mainWindow.otherPanel.addTab("Runtime", createRuntimeTab());
-		mainWindow.otherPanel.addTab("Levels", new SLLoadLevelComponent(tw));
+//		mainWindow.otherPanel.addTab("Levels", new SLLoadLevelComponent(tw));
 
 		// create rest of tabs here....
 	}
@@ -471,18 +471,18 @@ public class Application implements SpeedObserver, Executable,
 		return true;
 	}
 
-	@Override
-	public boolean selectedAgent(final int who) {
-		final JFrame frame = mainWindow;
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				AgentMonitor agentMonitor = new AgentMonitor(frame, who,
-						Application.this, Application.this.getLock());
-				agentMonitor.init();
-			}
-		});
-		return true;
-	}
+//	@Override
+//	public boolean selectedAgent(final int who) {
+//		final JFrame frame = mainWindow;
+//		SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				AgentMonitor agentMonitor = new AgentMonitor(frame, who,
+//						Application.this, Application.this.getLock());
+//				agentMonitor.init();
+//			}
+//		});
+//		return true;
+//	}
 
 	public void setAgentMonitored(int who, boolean monitored) {
 		Agent agent = whoAgentMap.get(who);
@@ -545,78 +545,78 @@ public class Application implements SpeedObserver, Executable,
 	 * BEGIN unimplemented functions that are part of StarLogoCObserver
 	 * interface
 	 ****/
-
-	@Override
-	public void addExportBreed(long arg0, String arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean deselectedAgent(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public int getSpeedSliderPosition() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void globalVariableChanged(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handleMenuEvent(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean isAnythingRunning() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void keysToExport() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void noTurtlesAlive() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void runForSomeTimeBlockDone(long arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setSpaceLandFocus(boolean arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void turtlesToExport() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void vmTicked(double arg0) {
-		// TODO Auto-generated method stub
-
-	}
+//
+//	@Override
+//	public void addExportBreed(long arg0, String arg1) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public boolean deselectedAgent(int arg0) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public int getSpeedSliderPosition() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public void globalVariableChanged(int arg0) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void handleMenuEvent(ActionEvent arg0) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public boolean isAnythingRunning() {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public void keysToExport() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void noTurtlesAlive() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void runForSomeTimeBlockDone(long arg0) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void setSpaceLandFocus(boolean arg0) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void turtlesToExport() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void vmTicked(double arg0) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	/***** END unimplemented functions that are part of StarLogoCObserver interface ****/
 }
