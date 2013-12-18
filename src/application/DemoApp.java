@@ -48,7 +48,7 @@ public class DemoApp extends Application {
 		// this determines who will be the A team and who will be the B team
 
 		controllerA = new neilChallenge.Controller(this, -50, 0, 50, -50, Color.blue);
-		controllerB = new barrel.Controller(this, 0, 50, 50, -50, Color.red);
+		controllerB = new neilChallenge.Controller(this, 0, 50, 50, -50, Color.red);
 
 //		controllerA = new nuthall.Controller(this, -50, 0, 50, -50, Color.blue);
 //		controllerB = new stanton.Controller(this, 0, 50, 50, -50, Color.red);

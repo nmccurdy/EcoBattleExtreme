@@ -24,6 +24,7 @@ import javax.swing.SwingUtilities;
 import slcodeblocks.RuntimeSpeedPanel;
 import starlogoc.GameManager;
 import starlogoc.StarLogo;
+import starlogoc.StarLogoCObserver;
 //import starlogoc.StarLogoCObserver;
 import starlogotng.SLURL;
 import terraineditor.TerrainManager;
@@ -31,7 +32,7 @@ import torusworld.TorusWorld;
 import torusworld.Turtles;
 
 public class Application implements SpeedObserver, Executable,
-		AgentMonitorObserver, AppMonitorObserver {
+		AgentMonitorObserver, AppMonitorObserver, StarLogoCObserver {
 
 	/** Camera perspectives */
 	public static final int AERIAL = 0;
@@ -95,7 +96,7 @@ public class Application implements SpeedObserver, Executable,
 		// sl.MAX_SOUNDS, sl);
 		// sl.setTurtleManager(tManager);
 
-//		sl.addObserver(this);
+		sl.addObserver(this);
 
 		pManager = new PatchManagerJava(101, 101, sl);
 		sl.setPatchManager(pManager);
@@ -471,18 +472,18 @@ public class Application implements SpeedObserver, Executable,
 		return true;
 	}
 
-//	@Override
-//	public boolean selectedAgent(final int who) {
-//		final JFrame frame = mainWindow;
-//		SwingUtilities.invokeLater(new Runnable() {
-//			public void run() {
-//				AgentMonitor agentMonitor = new AgentMonitor(frame, who,
-//						Application.this, Application.this.getLock());
-//				agentMonitor.init();
-//			}
-//		});
-//		return true;
-//	}
+	@Override
+	public boolean selectedAgent(final int who) {
+		final JFrame frame = mainWindow;
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				AgentMonitor agentMonitor = new AgentMonitor(frame, who,
+						Application.this, Application.this.getLock());
+				agentMonitor.init();
+			}
+		});
+		return true;
+	}
 
 	public void setAgentMonitored(int who, boolean monitored) {
 		Agent agent = whoAgentMap.get(who);

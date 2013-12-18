@@ -62,7 +62,7 @@ public class StarLogo {
     
     public volatile boolean runningp = false;
     public volatile boolean juststartedp = false;
-//    private static Set<StarLogoCObserver> observers = new LinkedHashSet<StarLogoCObserver>();
+    private static Set<StarLogoCObserver> observers = new LinkedHashSet<StarLogoCObserver>();
     private Object lock = new Float(1);
     
 //    private TurtleManager tm;
@@ -166,13 +166,13 @@ public class StarLogo {
 //    	this.tm = tm;
     }
 
-//    public void addObserver(StarLogoCObserver sco) {
-//        observers.add(sco);
-//    }
-//    
-//    public void removeObserver(StarLogoCObserver sco) {
-//        observers.remove(sco);
-//    }
+    public void addObserver(StarLogoCObserver sco) {
+        observers.add(sco);
+    }
+    
+    public void removeObserver(StarLogoCObserver sco) {
+        observers.remove(sco);
+    }
 //    
 //    public void handleMenuEvent(ActionEvent e) {
 //        for (StarLogoCObserver observer : observers)
@@ -564,18 +564,18 @@ public class StarLogo {
 //        while (i.hasNext()) i.next().vmTicked(slTime);
 //    }
     
-//    public boolean selectedAgent(int who) {
-//        for (StarLogoCObserver o : observers)
-//            return o.selectedAgent(who);
-//        return false;
-//    }
-//    
+    public boolean selectedAgent(int who) {
+        for (StarLogoCObserver o : observers)
+            return o.selectedAgent(who);
+        return false;
+    }
+    
 //    public boolean deselectedAgent(int who) {
 //        for (StarLogoCObserver o : observers)
 //            return o.deselectedAgent(who);
 //        return false;
 //    }
-    
+//    
 //    public void noTurtlesAlive() {
 //        for(Iterator<StarLogoCObserver> it = observers.iterator(); it.hasNext(); it.next().noTurtlesAlive());
 //    }

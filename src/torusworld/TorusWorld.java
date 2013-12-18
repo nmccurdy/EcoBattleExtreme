@@ -1154,7 +1154,7 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
             if (!hoveredAgent.monitored)
             {
                 // select the agent intersected by the ray
-//                sl.selectedAgent(hoveredAgent.who);
+                sl.selectedAgent(hoveredAgent.who);
 
                 // shortcut code to make the monitor indicator show up
                 // immediately rather than next frame
