@@ -18,26 +18,6 @@ public final class CoyoteCarnivoreCollision extends CollisionHandler<Coyote, Car
 
 		if (!(collidee instanceof Coyote)) {
 			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
-			collider.fight(collidee);
 		}
 
 		/***** Focus on this (end) *****/
