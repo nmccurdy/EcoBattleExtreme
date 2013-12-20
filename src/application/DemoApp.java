@@ -121,7 +121,7 @@ public class DemoApp extends Application {
 	public void execute() {
 
 		/***** Focus on this *****/
-		System.out.println("executing");
+//		System.out.println("executing");
 		if (!battleFinished) {
 			// This is where we put logic that we want to affect our shared
 			// variables. There is no corresponding section in Star Logo, but

@@ -111,7 +111,7 @@ public class SJAnimator {
 	private static void runRenderLoop() {
 		try {
 			while (!shouldStop) {
-				System.out.println("renderloop");
+//				System.out.println("renderloop");
 				// System.out.println("Focus: " + hasFocus);
 				Thread.yield();
 				if (!hasFocus)
@@ -152,7 +152,7 @@ public class SJAnimator {
 	private static void runVMLoop() {
 		try {
 			while (!shouldStop) {
-				System.out.println("vmloop");
+//				System.out.println("vmloop");
 				Thread.yield();
 
 				long time = System.nanoTime();
