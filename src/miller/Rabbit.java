@@ -18,7 +18,7 @@ public class Rabbit extends Herbivore {
 	private int runAwayTime = 0;
 	private static final int MAX_RUN_AWAY_TIME = 5;
 	public Rabbit(DemoApp app, Controller controller) {
-		super(app, controller, "Rabbit", "animals/Rabbit-default");
+		super(app, controller, "Rabbit", "animals/rabbit-default");
 		this.app = app;
 		this.controller = controller;
 		addCollisionHandler(RabbitGrassCollision.collision);
