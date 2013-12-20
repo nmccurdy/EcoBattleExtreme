@@ -555,7 +555,8 @@ public class SLTerrain
             if (Math.abs(h0a - h0b) > 0.0001 || Math.abs(h1a-h1b) > 0.0001)
             {
                 gotpatch = true;
-                data.getTerrainDataPatch(px, py, tempPatch);
+//                data.getTerrainDataPatch(px, py, tempPatch);
+                tempPatch = data.getPatch(px,py);
                 cx = getPatchCenterX(px);
                 cz = getPatchCenterZ(py);
                 
@@ -589,7 +590,8 @@ public class SLTerrain
             if (Math.abs(h0a - h0b) > 0.0001 || Math.abs(h1a-h1b) > 0.0001)
             {
                 if (!gotpatch)
-                    data.getTerrainDataPatch(px, py, tempPatch);
+                	tempPatch = data.getPatch(px, py);
+//                    data.getTerrainDataPatch(px, py, tempPatch);
                 cx = getPatchCenterX(px);
                 cz = getPatchCenterZ(py);
                 
@@ -739,7 +741,8 @@ public class SLTerrain
         {
             for (py = gy * GROUP_SIZE; py < (gy+1)*GROUP_SIZE && py < height; py++)
             {
-                data.getTerrainDataPatch(px, py, tempPatch);
+            	tempPatch = data.getPatch(px, py);
+//                data.getTerrainDataPatch(px, py, tempPatch);
 //                System.out.println("renering patch: " + px + ", " + py);
                 renderPatch(px, py, tempPatch, true);
                 
@@ -845,7 +848,8 @@ public class SLTerrain
             for (int y = 0; y < height; y++) {
             	// draws all 4 lines because we can change a patch's height 
             	// (i.e. there may be discontunities in spaceland). 
-                data.getTerrainDataPatch(x, y, tempPatch);
+                tempPatch = data.getPatch(x,y);
+//            	data.getTerrainDataPatch(x, y, tempPatch);
                 centerX = getPatchCenterX(x); centerZ = getPatchCenterZ(y);                
                 ax = centerX - halfPatchSize; ay = tempPatch.heights[0]; az = centerZ - halfPatchSize; // NW
                 bx = centerX - halfPatchSize; by = tempPatch.heights[1]; bz = centerZ + halfPatchSize; // SW

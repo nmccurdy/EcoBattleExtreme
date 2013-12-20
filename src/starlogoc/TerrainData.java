@@ -207,7 +207,7 @@ public class TerrainData {
 //		return (patchY * width + patchX)* PATCH_SIZE;
 //	}
 
-	private TerrainDataPatch getPatch(int x, int y) {
+	public TerrainDataPatch getPatch(int x, int y) {
 		return myPatches[y*width + x];
 	}
 	
@@ -339,11 +339,12 @@ public class TerrainData {
     /**
      * fills the fields of a TerrainDataPatch
      */
-    
-    public void getTerrainDataPatch(int patchX, int patchY, TerrainDataPatch p)
-    {
-    	p = getPatch(patchX, patchY);
-    }
+
+	// can't pass by reference in java
+//    public void getTerrainDataPatch(int patchX, int patchY, TerrainDataPatch p)
+//    {
+//    	p = getPatch(patchX, patchY);
+//    }
     
 //    /** Replace oldVar with newVar, or do nothing if oldVar doesn't exist. */
 //    public void renameVariable(Variable oldVar, Variable newVar) {

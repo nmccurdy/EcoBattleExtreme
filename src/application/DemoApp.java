@@ -239,8 +239,8 @@ public class DemoApp extends Application {
 	public void buildFence() {
 		for (int y = -50; y < 50; y++) {
 			
-//			this.setPatchColor(0, y, Color.black);
-			this.setPatchHeight(0, y, 2);
+			this.setPatchColor(0, y, Color.black);
+//			this.setPatchHeight(0, y, 2);
 		}
 
 		controllerA.setRightBoundary(0);
