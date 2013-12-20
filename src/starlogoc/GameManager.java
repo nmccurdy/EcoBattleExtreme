@@ -125,46 +125,48 @@ public class GameManager {
 	}
 	
 	public int getCameraView() {
-		if (isCameraViewChangedByBlocks()) {
-			currentView = getCameraViewOfBlocks();
-			if (cameraViewObservable.countObservers() > 0) {
-				//System.out.println("Notifying observers for camera buttons");
-				cameraViewObservable.changedCameraView();
-				cameraViewObservable.notifyObservers();
-			}
-		}
+//		if (isCameraViewChangedByBlocks()) {
+//			currentView = getCameraViewOfBlocks();
+//			if (cameraViewObservable.countObservers() > 0) {
+//				//System.out.println("Notifying observers for camera buttons");
+//				cameraViewObservable.changedCameraView();
+//				cameraViewObservable.notifyObservers();
+//			}
+//		}
 		return currentView;
+//		return 0;
 	}
-	private native boolean isCameraViewChangedByBlocks();
-	public native int getCameraViewOfBlocks();
+//	private native boolean isCameraViewChangedByBlocks();
+//	public native int getCameraViewOfBlocks();
 	
 	public boolean isOverhead() {
-		if (isOverheadChangedByBlocks()) {
-			isOverhead = getOverheadOfBlocks();
-			if (cameraViewObservable.countObservers() > 0) { 
-				cameraViewObservable.changedCameraView();
-				//System.out.println("Notifying observer that isOverhead = " + isOverhead);
-				cameraViewObservable.notifyObservers();
-			}
-		}
+//		if (isOverheadChangedByBlocks()) {
+//			isOverhead = getOverheadOfBlocks();
+//			if (cameraViewObservable.countObservers() > 0) { 
+//				cameraViewObservable.changedCameraView();
+//				//System.out.println("Notifying observer that isOverhead = " + isOverhead);
+//				cameraViewObservable.notifyObservers();
+//			}
+////		}
+//		return isOverhead;
 		return isOverhead;
 	}
-	private native boolean isOverheadChangedByBlocks();
-	private native boolean getOverheadOfBlocks();
+//	private native boolean isOverheadChangedByBlocks();
+//	private native boolean getOverheadOfBlocks();
 	
 	public void setPressedCameraViewButton(int cameraView) {
-		setCameraView(cameraView);
+//		setCameraView(cameraView);
 		currentView = cameraView;
 	}
-	private native void setCameraView(int cameraView);
+//	private native void setCameraView(int cameraView);
 	
 	public void setOverhead(boolean isOverhead) {
 		this.isOverhead = isOverhead;
-		setOverheadOfBlocks(isOverhead);
+//		setOverheadOfBlocks(isOverhead);
 	}
-	private native void setOverheadOfBlocks(boolean isOverhead);
+//	private native void setOverheadOfBlocks(boolean isOverhead);
 	
-	public native int whoNumberForCamera();
+//	public native int whoNumberForCamera();
 	
 	public void setTurtleWhoNumberForCamera(int who) {
 		// NJM

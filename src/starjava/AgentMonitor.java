@@ -129,9 +129,9 @@ public class AgentMonitor extends JDialog {
 			}
 		});
 
-		synchronized (lock) {
+//		synchronized (lock) {
 			observer.setAgentMonitored(whoNumber, true);
-		}
+//		}
 
 		// If opened from a hatch indicator, put it next to that monitor
 		if (c != null) {
@@ -183,9 +183,9 @@ public class AgentMonitor extends JDialog {
 
 		if (!hatchMonitor) {
 			openMonitors.remove(monitor.whoNumber);
-			synchronized (monitor.lock) {
+//			synchronized (monitor.lock) {
 				monitor.observer.setAgentMonitored(monitor.whoNumber, false);
-			}
+//			}
 			if (hatchMonitors.get(who) == null) {
 				monitor.timer.stop();
 			}
@@ -235,16 +235,16 @@ public class AgentMonitor extends JDialog {
 		// Set a timer delay for retrieving updates
 		timer = new Timer(250, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				synchronized (lock) {
+//				synchronized (lock) {
 					AgentMonitor.this.updateFields();
-				}
+//				}
 			}
 		});
 
-		synchronized (lock) {
+//		synchronized (lock) {
 			updateFields();
 			setTitle("Monitor " + whoNumber);
-		}
+//		}
 
 		JScrollPane scrollPane = new JScrollPane(panel);
 		scrollPane

@@ -80,11 +80,11 @@ public class StarLogo {
     private ConcurrentHashMap<String, Long> breedMap, breedShapeMap;
     
     /** StarLogoC.dll must be in the working directory to load the native code */
-    static {
-        try {
-            System.loadLibrary("StarLogoC");
-        } catch (Exception e) {e.printStackTrace(); }
-    }
+//    static {
+//        try {
+//            System.loadLibrary("StarLogoC");
+//        } catch (Exception e) {e.printStackTrace(); }
+//    }
     
     public static void main(String[] args) {
         new StarLogo();

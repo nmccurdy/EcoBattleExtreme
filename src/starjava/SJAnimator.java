@@ -111,6 +111,7 @@ public class SJAnimator {
 	private static void runRenderLoop() {
 		try {
 			while (!shouldStop) {
+				System.out.println("renderloop");
 				// System.out.println("Focus: " + hasFocus);
 				Thread.yield();
 				if (!hasFocus)
@@ -151,6 +152,7 @@ public class SJAnimator {
 	private static void runVMLoop() {
 		try {
 			while (!shouldStop) {
+				System.out.println("vmloop");
 				Thread.yield();
 
 				long time = System.nanoTime();
@@ -190,7 +192,9 @@ public class SJAnimator {
 				// StarLogo.isAnythingRunning())
 				{
 
-					synchronized (lock) {
+
+//					synchronized (lock) {
+//						System.out.println("vm acquired lock");
 						run = false;
 						executable.execute();
 // NJM this deadlocks with 1.5 for some reason
@@ -202,7 +206,7 @@ public class SJAnimator {
 							
 							tw.updateVMRelatedState();
 						}
-					}
+//					}
 				}
 				// otherwise, we're either not started, paused, or nothing
 				// is running, so get this thread to get out of the way for .1s

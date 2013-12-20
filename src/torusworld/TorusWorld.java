@@ -302,17 +302,17 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
 			public void editToggled(boolean isEditing) { }
 
 			public void nextAgent() {
-				int who = gManager.whoNumberForCamera();      
-				who = turtles.getNextWho(who);                
-                gManager.setTurtleWhoNumberForCamera(who);
-                SLCameras.currentAgent = turtles.getTurtleWho(who); 
+//				int who = gManager.whoNumberForCamera();      
+//				who = turtles.getNextWho(who);                
+//                gManager.setTurtleWhoNumberForCamera(who);
+//                SLCameras.currentAgent = turtles.getTurtleWho(who); 
 			}
 
 			public void previousAgent() {
-				int who = gManager.whoNumberForCamera();
-				who = turtles.getPrevWho(who);
-                gManager.setTurtleWhoNumberForCamera(who);
-                SLCameras.currentAgent = turtles.getTurtleWho(who);
+//				int who = gManager.whoNumberForCamera();
+//				who = turtles.getPrevWho(who);
+//                gManager.setTurtleWhoNumberForCamera(who);
+//                SLCameras.currentAgent = turtles.getTurtleWho(who);
 			}
 
 			public void terrainEdited(int operation) {
@@ -439,7 +439,7 @@ public class TorusWorld extends GLCanvas implements GLEventListener, MouseListen
         frameNum++;
 
         if (mustUpdateTerrain()) {
-            synchronized (sl.getLock())
+//            synchronized (sl.getLock())
             {
                 // Normally, one would do the check again (mustUpdateTerrain is synced);
                 // But no other thread can "unset" the need to update terrain (just set it). 

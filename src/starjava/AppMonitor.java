@@ -112,16 +112,16 @@ public class AppMonitor extends JDialog {
 		// Set a timer delay for retrieving updates
 		timer = new Timer(250, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				synchronized (lock) {
+//				synchronized (lock) {
 					AppMonitor.this.updateFields();
-				}
+//				}
 			}
 		});
 
-		synchronized (lock) {
+//		synchronized (lock) {
 			updateFields();
 			setTitle("Application Monitor");
-		}
+//		}
 
 		JScrollPane scrollPane = new JScrollPane(panel);
 		scrollPane
