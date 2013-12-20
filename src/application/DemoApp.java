@@ -2,6 +2,7 @@ package application;
 
 import java.awt.Color;
 import java.io.PrintStream;
+import java.util.LinkedList;
 
 import starjava.Agent;
 import starjava.AppMonitor;
@@ -47,8 +48,8 @@ public class DemoApp extends Application {
 
 		// this determines who will be the A team and who will be the B team
 
-		controllerA = new graack.Controller(this, -50, 0, 50, -50, Color.blue);
-		controllerB = new barrel.Controller(this, 0, 50, 50, -50, Color.red);
+		controllerA = new barrel.Controller(this, -50, 0, 50, -50, Color.blue);
+		controllerB = new graack.Controller(this, 0, 50, 50, -50, Color.red);
 
 //		controllerA = new nuthall.Controller(this, -50, 0, 50, -50, Color.blue);
 //		controllerB = new stanton.Controller(this, 0, 50, 50, -50, Color.red);
@@ -180,7 +181,8 @@ public class DemoApp extends Application {
 		double totalBlueEnergy = 0;
 		double totalRedEnergy = 0;
 
-		for (Agent agent : agents) {
+		LinkedList<Agent> agentsClone = (LinkedList<Agent>)agents.clone();
+		for (Agent agent : agentsClone) {
 			if (agent instanceof EcoObject) {
 				EcoObject eco = (EcoObject) agent;
 
@@ -237,7 +239,7 @@ public class DemoApp extends Application {
 	 * to use the color of the terrain to govern animal behavior, though.
 	 */
 	public void buildFence() {
-		for (int y = -50; y < 50; y++) {
+		for (int y = -50; y < 51; y++) {
 			
 			this.setPatchColor(0, y, Color.black);
 //			this.setPatchHeight(0, y, 2);
