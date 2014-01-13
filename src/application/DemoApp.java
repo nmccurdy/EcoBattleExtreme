@@ -28,8 +28,8 @@ public class DemoApp extends Application {
 	private boolean doesFenceExist = true;
 
 	// this variable tells us how long the fence will be up
-	private static final int FENCE_TIME = 300 + (int) (Math.random() * 200);
-//	private static final int FENCE_TIME = 10;
+//	private static final int FENCE_TIME = 300 + (int) (Math.random() * 200);
+	private static final int FENCE_TIME = 10;
 
 	/**
 	 * @param args
@@ -256,7 +256,7 @@ public class DemoApp extends Application {
 	 */
 	public void removeFence() {
 		Color groundColor = getPatchColor(-50, -50);
-		for (int y = -50; y < 50; y++) {
+		for (int y = -50; y < 51; y++) {
 			this.setPatchColor(0, y, groundColor);
 		}
 
