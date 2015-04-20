@@ -9,5 +9,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="application.DemoApp"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="EcoBattle2013v2"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea"/>
-<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="c:\program files\starlogo tng"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="/usr/local/wine_starlogo/drive_c/Program Files/StarLogo TNG"/>
 </launchConfiguration>
