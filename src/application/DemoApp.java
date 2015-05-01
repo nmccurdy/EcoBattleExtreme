@@ -28,8 +28,8 @@ public class DemoApp extends Application {
 	private boolean doesFenceExist = true;
 
 	// this variable tells us how long the fence will be up
-//	private static final int FENCE_TIME = 300 + (int) (Math.random() * 200);
-	private static final int FENCE_TIME = 10;
+	private static final int FENCE_TIME = 300 + (int) (Math.random() * 200);
+//	private static final int FENCE_TIME = 10;
 
 	/**
 	 * @param args
@@ -48,7 +48,7 @@ public class DemoApp extends Application {
 
 		// this determines who will be the A team and who will be the B team
 
-		controllerA = new barrel.Controller(this, -50, 0, 50, -50, Color.blue);
+		controllerA = new basic.Controller(this, -50, 0, 50, -50, Color.blue);
 		controllerB = new graack.Controller(this, 0, 50, 50, -50, Color.red);
 
 //		controllerA = new nuthall.Controller(this, -50, 0, 50, -50, Color.blue);

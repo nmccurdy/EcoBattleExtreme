@@ -1,4 +1,4 @@
-package MattLyon;
+package basic;
 
 import java.io.PrintStream;
 import java.util.AbstractList;
@@ -7,7 +7,6 @@ import starjava.Agent;
 import starjava.SmellHandler;
 import application.Carnivore;
 import application.DemoApp;
-import application.Grass;
 import application.Herbivore;
 
 public class Coyote extends Carnivore {
@@ -25,12 +24,11 @@ public class Coyote extends Carnivore {
 	private int lastBabyWho = -1;
 
 	public Coyote(DemoApp app, Controller controller) {
-		super(app, controller, "Coyote", "animals/dog-default");
+		super(app, controller, "Dog", "animals/dog-default");
 
 		this.app = app;
 		this.controller = controller;
 
-		addCollisionHandler(CoyoteCarnivoreCollision.collision);
 		addCollisionHandler(CoyoteHerbivoreCollision.collision);
 
 		// place the animal randomly inside the boundaries governed by the
@@ -40,8 +38,9 @@ public class Coyote extends Carnivore {
 		double height = controller.getTopBoundary()
 				- controller.getBottomBoundary();
 
-		setXY(controller.getLeftBoundary() + Math.random() * width,
-				controller.getBottomBoundary() + Math.random() * height);
+		setXY(controller.getLeftBoundary() + Math.random() * width, controller
+				.getBottomBoundary()
+				+ Math.random() * height);
 
 		setSize(2);
 
@@ -77,7 +76,7 @@ public class Coyote extends Carnivore {
 		app.addExecutable(baby);
 
 		// if you don't give energy to the baby, it will die
-		// immediately. A percentage of your energy is
+		// immediately.  A percentage of your energy is 
 		// removed in the process.
 		giveEnergyToBaby(baby, .25);
 
@@ -89,30 +88,38 @@ public class Coyote extends Carnivore {
 	}
 
 	private void move() {
-		// Basically what all of this code does is make the coyotes
-		// chase the rabbits(as long as the coyotes are hungry and as long
+		// Basically what all of this code does is make the dogs
+		// chase the turtles (as long as the dogs are hungry and as long
 		// as they aren't running away or attacking another carnivore.)
 
 		if (!fightOrFlight()) {
 			if (shouldLookForFood()) {
-				if (!huntRabbits()) {
-					if (energy < .70)
-						forward(.05);
-					right(Math.random()+20);
-					left(Math.random()+20);
-					if (energy > .60)
-						huntRabbits();
-					// walk around randomly since the coyote can't smell any
-					// food.
-						
-					 else {
-						
-						 
+				AbstractList<Agent> animals = smell(15, new SmellHandler() {
+					@Override
+					public boolean smellCondition(Agent smellee) {
+						return smellee instanceof Herbivore
+								&& smellee.getX() >= controller
+										.getLeftBoundary()
+								&& smellee.getX() <= controller
+										.getRightBoundary();
+					}
+				});
+
+				if (animals.size() > 0) {
+					app.sortByClosestTo(getX(), getY(), animals);
+					Agent closest = animals.get(0);
+					setHeading(getHeadingTowards(closest.getX(), closest.getY()));
+					forward(2);
+				} else {
+					// walk around randomly since the dog can't smell any food.
+					left(Math.random() * 30);
+					right(Math.random() * 30);
+					forward(1);
 				}
 			}
 		}
-
-		// if the coyote reaches the edge of the world, have it turn around.
+		
+		// if the dog reaches the edge of the world, have it turn around.
 		// the || in the line below is the Java way of saying OR.
 		if (getX() <= controller.getLeftBoundary() + 1
 				|| getX() >= controller.getRightBoundary() - 1
@@ -123,57 +130,6 @@ public class Coyote extends Carnivore {
 			left(Math.random() * 20);
 			forward(1);
 		}
-		}
-}
-
-	private boolean moveTowardsLongGrass() {
-		// TODO Auto-generated method stub
-		AbstractList<Agent> grasses = smell(10, new SmellHandler() {
-			@Override
-			public boolean smellCondition(Agent smellee) {
-				return smellee instanceof Grass
-						&& smellee.getX() >= controller.getLeftBoundary()
-						&& smellee.getX() <= controller.getRightBoundary();
-			}
-		});
-
-		if (grasses.size() > 0) {
-			// sort the grass
-			app.sortByClosestTo(getX(), getY(), grasses);
-
-			Agent closest = grasses.get(0);
-			setHeading(getHeadingTowards(closest.getX(), closest.getY()));
-			right(Math.random() * 20);
-			left(Math.random() * 20);
-			forward(2);
-
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
-	private boolean huntRabbits() {
-		AbstractList<Agent> animals = smell(15, new SmellHandler() {
-			@Override
-			public boolean smellCondition(Agent smellee) {
-				return smellee instanceof Herbivore
-						&& smellee.getX() >= controller.getLeftBoundary()
-						&& smellee.getX() <= controller.getRightBoundary();
-			}
-		});
-
-		if (animals.size() > 0) {
-			app.sortByClosestTo(getX(), getY(), animals);
-			Agent closest = animals.get(0);
-			setHeading(getHeadingTowards(closest.getX(), closest.getY()));
-			forward(1);
-
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public boolean shouldLookForFood() {
@@ -181,8 +137,8 @@ public class Coyote extends Carnivore {
 	}
 
 	/*
-	 * Deal with other carnivores. Either attack them or run away from them
-	 * depending on the amount of energy you have.
+	 * Deal with other carnivores.  Either attack them or run away
+	 * from them depending on the amount of energy you have.
 	 */
 	public boolean fightOrFlight() {
 		AbstractList<Agent> carnivores = smell(5, new SmellHandler() {
@@ -200,7 +156,7 @@ public class Coyote extends Carnivore {
 			setHeading(getHeadingTowards(enemy.getX(), enemy.getY()));
 			if (getEnergy() < .9 * MAX_ENERGY) {
 				// run away
-				//fight(null);
+				left(180);
 			}
 
 			forward(2);
@@ -215,6 +171,6 @@ public class Coyote extends Carnivore {
 	public void outputStatusInfo(PrintStream os) {
 		super.outputStatusInfo(os);
 
-		os.format("%nCoyote:%n");
+		os.format("%nDog:%n");
 	}
 }
