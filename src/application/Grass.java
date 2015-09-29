@@ -25,7 +25,7 @@ public final class Grass extends Agent implements EcoObject {
 	
 	// these are the constants that are used to govern how rapidly the grass
 	// grows and how much energy the grass contains.
-	public static final double MAX_ENERGY = 300;
+	private static final double MAX_ENERGY = 300;
 
 	private static final double PERCENT_ENERGY_TRANSFERRED = 1;
 	private static final double ENERGY_PER_BITE = 2;
@@ -45,7 +45,7 @@ public final class Grass extends Agent implements EcoObject {
 
 		addCollisionHandler(GrassGrassCollision.collision);
 
-		energy = MAX_ENERGY / 2;
+		energy = getMAX_ENERGY()/ 2;
 		age = (int) (Math.random() * 100);
 
 		setSize(GRASS_SIZE);
@@ -72,7 +72,6 @@ public final class Grass extends Agent implements EcoObject {
 				// First we create a baby grass
 				Grass baby = new Grass(app);
 				app.addCollidableAgent(baby);
-				app.removeDrawableAgent(baby); //hack
 				app.addExecutable(baby);
 
 				// Now we make the baby grass be at the same location as the
@@ -107,7 +106,7 @@ public final class Grass extends Agent implements EcoObject {
 		final double SCALE = 0.5;
 		final double ZERO_ADJUSTMENT = 1.3;
 
-		double grassHeight = energy * SCALE / MAX_ENERGY;
+		double grassHeight = energy * SCALE / getMAX_ENERGY();
 		double zeroHeight = -(GRASS_SIZE + ZERO_ADJUSTMENT);
 		setHeightAboveTerrain(zeroHeight + grassHeight);
 	}
@@ -178,20 +177,27 @@ public final class Grass extends Agent implements EcoObject {
 	}
 
 	@Override
-	public final double beingEatenBy(Animal eater) {
-		energy = energy - ENERGY_PER_BITE;
+	public final double beingEatenBy(EcoObject eater) {
+		
+		double energyPerBite = getEnergyPerBite();
+		
+		energy = energy - energyPerBite;
 
 		if (energy <= 0) {
 			die();
-			return (energy + ENERGY_PER_BITE) * PERCENT_ENERGY_TRANSFERRED;
+			return (energy + energyPerBite) * PERCENT_ENERGY_TRANSFERRED;
 		} else {
-			return ENERGY_PER_BITE * PERCENT_ENERGY_TRANSFERRED;
+			return energyPerBite * PERCENT_ENERGY_TRANSFERRED;
 		}
 	}
 
 	@Override
 	public final double getEnergy() {
 		return energy;
+	}
+	
+	public double getEnergyPerBite() {
+		return ENERGY_PER_BITE * app.getWorldMultiplier();
 	}
 
 	@Override
@@ -206,9 +212,12 @@ public final class Grass extends Agent implements EcoObject {
 	private void increaseEnergy(double amount) {
 		energy = energy + amount;
 
-		if (energy > MAX_ENERGY) {
-			energy = MAX_ENERGY;
+		if (energy > getMAX_ENERGY()) {
+			energy = getMAX_ENERGY();
 		}
 	}
 
+	public double getMAX_ENERGY() {
+		return MAX_ENERGY * app.getWorldMultiplier();
+	}
 }

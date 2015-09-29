@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/EcoBattle2013v2/src/application/DemoApp.java"/>
+<listEntry value="/EcoBattleExtreme/src/application/DemoApp.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="application.DemoApp"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="EcoBattle2013v2"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="EcoBattleExtreme"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea"/>
 <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="/usr/local/wine_starlogo/drive_c/Program Files/StarLogo TNG"/>
 </launchConfiguration>

@@ -2,7 +2,6 @@ package application;
 
 import java.awt.Color;
 import java.io.PrintStream;
-import java.util.LinkedList;
 
 import starjava.Agent;
 import starjava.AppMonitor;
@@ -29,7 +28,8 @@ public class DemoApp extends Application {
 
 	// this variable tells us how long the fence will be up
 	private static final int FENCE_TIME = 300 + (int) (Math.random() * 200);
-//	private static final int FENCE_TIME = 10;
+
+	private double worldMultiplier = 25;
 
 	/**
 	 * @param args
@@ -47,30 +47,19 @@ public class DemoApp extends Application {
 		super();
 
 		// this determines who will be the A team and who will be the B team
-
-		controllerA = new basic.Controller(this, -50, 0, 50, -50, Color.blue);
-		controllerB = new graack.Controller(this, 0, 50, 50, -50, Color.red);
-
-//		controllerA = new nuthall.Controller(this, -50, 0, 50, -50, Color.blue);
-//		controllerB = new stanton.Controller(this, 0, 50, 50, -50, Color.red);
-
-//		controllerA = new lung.Controller(this, -50, 0, 50, -50, Color.blue);
-//		controllerB = new stanton.Controller(this, 0, 50, 50, -50, Color.red);
-		
-//		controllerA = new horwitz.Controller(this, -50, 0, 50, -50, Color.blue);
-//		controllerB = new lung.Controller(this, 0, 50, 50, -50, Color.red);
+		controllerA = new neil.Controller(this, -50, 0, 50, -50, Color.blue);
+		controllerB = new kids.Controller(this, 0, 50, 50, -50, Color.red);
 
 		init();
+
 	}
 
 	public void setup() {
 		super.setup();
-
 		/***** Focus on this *****/
-		System.out.println("setting up");
+
 		// This section of code is similar to the Setup block
 		// in Star Logo
-
 		// This is how you open the new app monitor that shows app-specific
 		// (shared)
 		// variables
@@ -110,19 +99,17 @@ public class DemoApp extends Application {
 				addCollidableAgent(grass);
 				addExecutable(grass);
 
-//				addDrawableAgent(grass);  // no longer need this because of backwards compatibility hack.
-				
 				grass.setXY(xStart + j * Grass.GRASS_SPACING, yStart + i
 						* Grass.GRASS_SPACING);
+				addDrawableAgent(grass);
 			}
 		}
 	}
 
 	@Override
 	public void execute() {
-
 		/***** Focus on this *****/
-//		System.out.println("executing");
+
 		if (!battleFinished) {
 			// This is where we put logic that we want to affect our shared
 			// variables. There is no corresponding section in Star Logo, but
@@ -141,6 +128,7 @@ public class DemoApp extends Application {
 
 			controllerA.execute();
 			controllerB.execute();
+
 			super.execute();
 		} else {
 			try {
@@ -181,28 +169,30 @@ public class DemoApp extends Application {
 		double totalBlueEnergy = 0;
 		double totalRedEnergy = 0;
 
-		LinkedList<Agent> agentsClone = (LinkedList<Agent>)agents.clone();
-		for (Agent agent : agentsClone) {
+		for (Agent agent : agents) {
 			if (agent instanceof EcoObject) {
 				EcoObject eco = (EcoObject) agent;
 
 				if (agent instanceof Grass) {
 					numGrass++;
-				} else if (agent instanceof Herbivore) {
-					if (agent.isColor(Color.blue)) {
-						numBlueHerbivores++;
-						totalBlueEnergy += eco.getEnergy();
-					} else {
-						numRedHerbivores++;
-						totalRedEnergy += eco.getEnergy();
-					}
-				} else if (agent instanceof Carnivore) {
-					if (agent.isColor(Color.blue)) {
-						numBlueCarnivores++;
-						totalBlueEnergy += eco.getEnergy();
-					} else {
-						numRedCarnivores++;
-						totalRedEnergy += eco.getEnergy();
+				} else if (agent instanceof Animal
+						&& !((Animal) agent).isCorpse()) {
+					if (agent instanceof Herbivore) {
+						if (agent.isColor(Color.blue)) {
+							numBlueHerbivores++;
+							totalBlueEnergy += eco.getEnergy();
+						} else {
+							numRedHerbivores++;
+							totalRedEnergy += eco.getEnergy();
+						}
+					} else if (agent instanceof Carnivore) {
+						if (agent.isColor(Color.blue)) {
+							numBlueCarnivores++;
+							totalBlueEnergy += eco.getEnergy();
+						} else {
+							numRedCarnivores++;
+							totalRedEnergy += eco.getEnergy();
+						}
 					}
 				}
 			}
@@ -239,10 +229,8 @@ public class DemoApp extends Application {
 	 * to use the color of the terrain to govern animal behavior, though.
 	 */
 	public void buildFence() {
-		for (int y = -50; y < 51; y++) {
-			
+		for (int y = -50; y < 50; y++) {
 			this.setPatchColor(0, y, Color.black);
-//			this.setPatchHeight(0, y, 2);
 		}
 
 		controllerA.setRightBoundary(0);
@@ -256,7 +244,7 @@ public class DemoApp extends Application {
 	 */
 	public void removeFence() {
 		Color groundColor = getPatchColor(-50, -50);
-		for (int y = -50; y < 51; y++) {
+		for (int y = -50; y < 50; y++) {
 			this.setPatchColor(0, y, groundColor);
 		}
 
@@ -290,5 +278,9 @@ public class DemoApp extends Application {
 		} else {
 			System.out.println("Cheater?");
 		}
+	}
+
+	public double getWorldMultiplier() {
+		return worldMultiplier;
 	}
 }
