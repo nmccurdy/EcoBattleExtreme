@@ -44,7 +44,7 @@ public class Rabbit extends Herbivore {
 	 * @param controller
 	 */
 	public Rabbit(DemoApp app, Controller controller) {
-		super(app, controller, "animals/Rabbit-default");
+		super(app, controller, "animals/rabbit-default");
 
 		this.app = app;
 		this.controller = controller;
@@ -69,7 +69,7 @@ public class Rabbit extends Herbivore {
 	}
 
 	public Rabbit(DemoApp app, Controller controller, Rabbit parent) {
-		super(app, controller, "animals/Rabbit-default", parent);
+		super(app, controller, "animals/rabbit-default", parent);
 
 		this.app = app;
 		this.controller = controller;
