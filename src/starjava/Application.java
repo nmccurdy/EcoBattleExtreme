@@ -231,7 +231,7 @@ public class Application implements SpeedObserver, Executable,
 	}
 
 	public void addCollidableAgent(Agent agent) {
-		addDrawableAgent(agent);  // hack to make ecobattle backwards compatible
+//		addDrawableAgent(agent);  // hack to make ecobattle backwards compatible
 		if (agent.isAlive()) {
 			agents.add(agent);
 			whoAgentMap.put(agent.getWho(), agent);
