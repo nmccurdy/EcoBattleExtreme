@@ -2,6 +2,7 @@ package application;
 
 import java.awt.Color;
 import java.io.PrintStream;
+import java.util.LinkedList;
 
 import starjava.Agent;
 import starjava.AppMonitor;
@@ -169,7 +170,9 @@ public class DemoApp extends Application {
 		double totalBlueEnergy = 0;
 		double totalRedEnergy = 0;
 
-		for (Agent agent : agents) {
+		LinkedList<Agent> agentsCopy = (LinkedList<Agent>)agents.clone();
+		
+		for (Agent agent : agentsCopy) {
 			if (agent instanceof EcoObject) {
 				EcoObject eco = (EcoObject) agent;
 

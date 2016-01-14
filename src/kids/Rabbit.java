@@ -303,14 +303,14 @@ public class Rabbit extends Herbivore {
 
 	public boolean isHungry() {
 		if (isEating) {
-			return getEnergy() < 98;
+			return getEnergy() < .98*getMAX_ENERGY();
 		} else {
-			return getEnergy() < 80;
+			return getEnergy() < .80*getMAX_ENERGY();
 		}
 	}
 
 	public boolean shouldLookForFood() {
-		return getEnergy() < 85;
+		return getEnergy() < .85*getMAX_ENERGY();
 
 	}
 
@@ -320,9 +320,9 @@ public class Rabbit extends Herbivore {
 
 	public boolean isReallyHungry() {
 		if (isEating) {
-			return getEnergy() < 50;
+			return getEnergy() < .50*getMAX_ENERGY();
 		} else {
-			return getEnergy() < 30;
+			return getEnergy() < .30*getMAX_ENERGY();
 		}
 	}
 
